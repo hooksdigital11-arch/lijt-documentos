@@ -22,11 +22,10 @@ dialog.addEventListener('click', (event) => {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   const data = new FormData(form);
-  const subject = encodeURIComponent(`Contato LIJT — ${data.get('assunto')}`);
-  const body = encodeURIComponent(`Nome: ${data.get('nome')}\nWhatsApp: ${data.get('telefone')}\nE-mail: ${data.get('email')}\nAssunto: ${data.get('assunto')}\n\nDemanda:\n${data.get('mensagem')}`);
+  const message = encodeURIComponent(`Olá, LIJT!\n\nNome: ${data.get('nome')}\nWhatsApp: ${data.get('telefone')}\nE-mail: ${data.get('email')}\nAssunto: ${data.get('assunto')}\n\nDemanda:\n${data.get('mensagem')}`);
   form.hidden = true;
   success.hidden = false;
-  window.location.href = `mailto:contato@lijtdocumentos.com.br?subject=${subject}&body=${body}`;
+  window.location.href = `https://wa.me/5531932641283?text=${message}`;
 });
 
 document.querySelectorAll('details').forEach((item) => {
