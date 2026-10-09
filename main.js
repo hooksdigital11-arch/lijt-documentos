@@ -1,20 +1,16 @@
 const dialog = document.querySelector('.lead-dialog');
 const intentField = document.querySelector('#intent-field');
 const form = document.querySelector('#lead-form');
-const success = document.querySelector('.form-success');
 
 document.querySelectorAll('.js-open-lead').forEach((trigger) => {
   trigger.addEventListener('click', () => {
     intentField.value = trigger.dataset.intent || 'Conversa com especialista';
-    form.hidden = false;
-    success.hidden = true;
     dialog.showModal();
     requestAnimationFrame(() => dialog.querySelector('input:not([readonly])')?.focus());
   });
 });
 
 document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
-document.querySelector('.dialog-done').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', (event) => {
   if (event.target === dialog) dialog.close();
 });
@@ -23,8 +19,6 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   const data = new FormData(form);
   const message = encodeURIComponent(`Olá, LIJT!\n\nNome: ${data.get('nome')}\nWhatsApp: ${data.get('telefone')}\nE-mail: ${data.get('email')}\nAssunto: ${data.get('assunto')}\n\nDemanda:\n${data.get('mensagem')}`);
-  form.hidden = true;
-  success.hidden = false;
   window.location.href = `https://wa.me/5531932641283?text=${message}`;
 });
 
